@@ -1,6 +1,18 @@
 import XCTest
-@testable import soa_swift
+@testable import SoA
 
 final class soa_swiftTests: XCTestCase {
-    // TODO
+    func testNewArraySetElementAndRetrieve() {
+        let soa = SoA()
+        soa.newArray(String.self)
+        soa[0][1] = "Hello world"
+        XCTAssertEqual(soa[0][1], "Hello world")
+    }
+
+    func testValueFunc() {
+        let soa = SoA()
+        soa.newArray(String.self)
+        soa[0][1] = "Hello world"
+        XCTAssertEqual(soa.value(of: 0, at: 1), "Hello world")
+    }
 }

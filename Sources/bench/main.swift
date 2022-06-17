@@ -23,21 +23,21 @@ let read = BenchmarkSuite(name: "Loop read", settings: Iterations(100000), Warmu
     soa.realloc(withUnsafeCapacity: 1000)
 
     let idx1 = soa.newArray(Int.self)
-    let fields1: UnsafeMutableBufferPointer<Int> = soa.unsafeGetArray(withIndex: idx1)
+    let fields1: UnsafeMutableBufferPointer<Int?> = soa.unsafeGetArray(withIndex: idx1)
     for i in 0..<1000 { fields1[i] = 420 }
 
     let idx2 = soa.newArray(String.self)
-    let fields2: UnsafeMutableBufferPointer<String> = soa.unsafeGetArray(withIndex: idx2)
+    let fields2: UnsafeMutableBufferPointer<String?> = soa.unsafeGetArray(withIndex: idx2)
     for i in 0..<1000 { fields2[i] = "Hello world" }
 
     let idx3 = soa.newArray(Float64.self)
-    let fields3: UnsafeMutableBufferPointer<Float64> = soa.unsafeGetArray(withIndex: idx3)
+    let fields3: UnsafeMutableBufferPointer<Float64?> = soa.unsafeGetArray(withIndex: idx3)
     for i in 0..<1000 { fields3[i] = 6.9 }
-    
+
     //=========//
     // benches //
     //=========//
-    
+
     suite.benchmark("Array of struct") {
         // for i in 0..<1000 {
         //     arr[i].field1 = 5
@@ -48,9 +48,9 @@ let read = BenchmarkSuite(name: "Loop read", settings: Iterations(100000), Warmu
             }
         }
     }
-    
+
     suite.benchmark("Struct of arrays") {
-        let a: UnsafeMutableBufferPointer<Int> = soa.unsafeGetArray(withIndex: 0)
+        let a: UnsafeMutableBufferPointer<Int?> = soa.unsafeGetArray(withIndex: 0)
         for i in 0..<1000 {
             let _f = a[i]
         }
@@ -76,17 +76,17 @@ let mut = BenchmarkSuite(name: "Loop mutate", settings: Iterations(100000), Warm
     soa.realloc(withUnsafeCapacity: 1000)
 
     let idx1 = soa.newArray(Int.self)
-    let fields1: UnsafeMutableBufferPointer<Int> = soa.unsafeGetArray(withIndex: idx1)
+    let fields1: UnsafeMutableBufferPointer<Int?> = soa.unsafeGetArray(withIndex: idx1)
     for i in 0..<1000 { fields1[i] = 420 }
 
     let idx2 = soa.newArray(String.self)
-    let fields2: UnsafeMutableBufferPointer<String> = soa.unsafeGetArray(withIndex: idx2)
+    let fields2: UnsafeMutableBufferPointer<String?> = soa.unsafeGetArray(withIndex: idx2)
     for i in 0..<1000 { fields2[i] = "Hello world" }
 
     let idx3 = soa.newArray(Float64.self)
-    let fields3: UnsafeMutableBufferPointer<Float64> = soa.unsafeGetArray(withIndex: idx3)
+    let fields3: UnsafeMutableBufferPointer<Float64?> = soa.unsafeGetArray(withIndex: idx3)
     for i in 0..<1000 { fields3[i] = 6.9 }
-    
+
     //=========//
     // benches //
     //=========//
@@ -97,9 +97,9 @@ let mut = BenchmarkSuite(name: "Loop mutate", settings: Iterations(100000), Warm
             }
         }
     }
-    
+
     suite.benchmark("Struct of arrays") {
-        let a: UnsafeMutableBufferPointer<Int> = soa.unsafeGetArray(withIndex: 0)
+        let a: UnsafeMutableBufferPointer<Int?> = soa.unsafeGetArray(withIndex: 0)
         for i in 0..<1000 {
             a[i] = 69
         }
