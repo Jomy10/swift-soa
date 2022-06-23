@@ -24,7 +24,7 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "soa-swiftTests",
+            name: "SoATests",
             dependencies: ["SoA"]),
     ]
 )
